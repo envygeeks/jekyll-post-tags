@@ -1,0 +1,12 @@
+---
+layout: default
+recent: false
+sidebar: "blog"
+heading: true
+---
+
+<ul class="tags">
+  {% for post in site.tags[page.tag] %}
+    <li>{{ page.tag }}</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,6 @@
+/spec/fixture/.*
+/spec/fixture/_site
+/Gemfile.lock
+/coverage
+/.bundle
+/vendor
