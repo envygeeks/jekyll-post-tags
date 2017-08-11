@@ -1,5 +1,4 @@
 require "rspec"
-require "support/simplecov"
 require "luna/rspec/formatters/checks"
 require "jekyll/post/tags"
 require "jekyll"
