@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.version = Jekyll::Post::Tags::VERSION
   spec.summary = "Post Tags for Jekyll"
   spec.email = ["jordon@envygeeks.io"]
-  spec.name = "jekyll-post-tags"
+  spec.name = "jekyll3-post-tags"
   spec.require_paths = ["lib"]
   spec.has_rdoc = false
   spec.license = "MIT"
