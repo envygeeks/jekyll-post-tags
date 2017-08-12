@@ -1,66 +1,52 @@
-module Jekyll::RSpecHelpers
-  def silence_stdout(return_stringio = false)
-    old_stdout, old_stderr = $stdout, $stderr
-    $stdout = stdout = StringIO.new
-    $stderr = stderr = StringIO.new
-    output  = yield
-    if return_stringio
-      return [
-        $stdout.string,
-        $stderr.string
-      ]
-    else
-      return output
+module Jekyll
+  module RSpecHelpers
+
+    # --
+    # The path to the fixture directory.
+    # @note this is where we store data files.
+    # @return [Pathutil] the path.
+    # --
+    def self.fixture_path
+      @path ||= Pathutil.new("spec/fixture").expand_path
     end
-  ensure
-    $stdout = old_stdout
-    $stderr = old_stderr
-  end
 
-  def capture_stdout(&block)
-    return silence_stdout(
-      true, &block
-    )
-  end
+    # --
+    # @note we don't really use the return.
+    # @return [Array<String,String>] the outputs.
+    # Silences stdout.
+    # --
+    def silence_stdout
+      oldo, olde = $stdout, $stderr
+      $stdout = StringIO.new
+      $stderr = StringIO.new
+      yield
 
-  def strip_ansi(str)
-    str.gsub(
-      /\e\[(?:\d+)(?:;\d+)?m/, ""
-    )
-  end
+    ensure
+      $stdout = oldo if oldo
+      $stderr = olde if olde
+    end
 
-  def stub_jekyll_site(oth_opts = {})
-    opts = Jekyll::Utils.deep_merge_hashes(
-      Jekyll::Configuration::DEFAULTS, {
-        "full_rebuild" => true,
-        "source"       => File.expand_path("../../fixture",       __FILE__),
-        "destination"  => File.expand_path("../../fixture/_site", __FILE__)
-      }
-    )
+    # --
+    def stub_jekyll_site(oth_opts = {})
+      path = RSpecHelpers.fixture_path
 
-    Jekyll::Site.new(
-      Jekyll::Utils.deep_merge_hashes(
-        opts, oth_opts
-      )
-    )
-  end
+      Jekyll::Site.new(Jekyll.configuration({
+        "source" => path.to_s,
+        "destination" => path.join(
+          "_site").to_s,
+      }))
+    end
 
-  def get_stubbed_file(file)
-    File.read(
-      File.join(
-        File.expand_path("../../fixture/_site", __FILE__), file
-      )
-    )
-  end
+    # --
+    def get_stubbed_file(files)
+      RSpecHelpers.fixture_path.join("_site",
+        *files).read
+    end
 
-  class << self
-    def cleanup_trash
-      %W(.asset-cache .jekyll-metadata _site _assets/manifest.json).each do |v|
-        FileUtils.rm_rf(
-          File.join(
-            File.expand_path("../../fixture", __FILE__), v
-          )
-        )
+    def self.cleanup_trash
+      %W(.asset-cache .jekyll-metadata _site
+      _assets .jekyll-cache).each do |v|
+        fixture_path.join(v).rm_rf
       end
     end
   end
