@@ -1,6 +1,7 @@
-# Frozen-String-Literal: true
-# Copyright 2016 - 2017 Jordon Bedwell - MIT License
-# Encoding: UTF-8
+# Frozen-string-literal: true
+# Copyright: 2016 - 2018 - MIT License
+# Author: Jordon Bedwell
+# Encoding: utf-8
 
 require_relative "helpers"
 require "liquid/drop/str"
@@ -8,20 +9,15 @@ require "liquid/drop/str"
 module Jekyll
   module Post
     module Tags
-
-      # --
-      # @see https://github.com/envygeeks/liquid-string-drop
-      # Provides a string drop that we can wrap directly
-      #   back into Jekyll without disrupting the ways users
-      #   work, and without disrupting the way Jekyll currently
-      #   works with it's own stuff.
-      # --
       class Drop < Liquid::Drop::Str
         attr_reader :weight, :site
         extend Forwardable::Extended
         rb_delegate :name, to: :@tag, alias_of: :to_s
         include Helpers
 
+        # --
+        # New instance.
+        # @return [nil]
         # --
         def initialize(tag, site:, weight: 1)
           super(tag)
@@ -32,14 +28,18 @@ module Jekyll
         end
 
         # --
+        # The url of the tag.
+        # @return [String]
+        # --
         def url
           File.join(*tag_path)
         end
 
         # --
+        # Loop through, and return tags.
+        # @param site [Jekyll::Site] the site.
+        # @note These should return drops?
         # @return [[]] the tags.
-        # Loop through tags, set them up and then, pass
-        #   them back out.
         # --
         def self.to_tags(site:)
           div = 4.0 / site.tags.values.max_by(&:size).size

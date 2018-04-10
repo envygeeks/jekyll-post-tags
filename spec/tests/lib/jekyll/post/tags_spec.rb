@@ -1,3 +1,8 @@
+# Frozen-string-literal: true
+# Copyright: 2016 - 2018 - MIT License
+# Author: Jordon Bedwell
+# Encoding: utf-8
+
 require "rspec/helper"
 describe Jekyll::Post::Tags do
   let :site do
@@ -34,7 +39,7 @@ describe Jekyll::Post::Tags do
 
   #
 
-  describe "Jekyll", :site => true do
+  describe "Jekyll", site: true do
     describe "Document" do
       describe "#data['tags']" do
         it "should make all tags a drop" do

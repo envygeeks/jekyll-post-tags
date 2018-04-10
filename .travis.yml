@@ -1,4 +1,5 @@
 language: ruby
+script: script/test
 cache:
   bundler: true
   directories:

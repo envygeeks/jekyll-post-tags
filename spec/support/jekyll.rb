@@ -1,3 +1,8 @@
+# Frozen-string-literal: true
+# Copyright: 2016 - 2018 - MIT License
+# Author: Jordon Bedwell
+# Encoding: utf-8
+
 module Jekyll
   module RSpecHelpers
 
@@ -20,14 +25,13 @@ module Jekyll
       $stdout = StringIO.new
       $stderr = StringIO.new
       yield
-
     ensure
       $stdout = oldo if oldo
       $stderr = olde if olde
     end
 
     # --
-    def stub_jekyll_site(oth_opts = {})
+    def stub_jekyll_site
       path = RSpecHelpers.fixture_path
 
       Jekyll::Site.new(Jekyll.configuration({
@@ -44,8 +48,7 @@ module Jekyll
     end
 
     def self.cleanup_trash
-      %W(.asset-cache .jekyll-metadata _site
-      _assets .jekyll-cache).each do |v|
+      %w(.asset-cache .jekyll-metadata _site _assets .jekyll-cache).each do |v|
         fixture_path.join(v).rm_rf
       end
     end
@@ -55,5 +58,5 @@ end
 RSpec.configure do |c|
   c.include Jekyll::RSpecHelpers
   c.before(:each) { Jekyll::RSpecHelpers.cleanup_trash }
-  c.after (:each) { Jekyll::RSpecHelpers.cleanup_trash }
+  c. after(:each) { Jekyll::RSpecHelpers.cleanup_trash }
 end

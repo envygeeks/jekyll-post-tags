@@ -1,46 +1,52 @@
-# Frozen-String-Literal: true
-# Copyright 2016 - 2017 Jordon Bedwell - MIT License
-# Encoding: UTF-8
+# Frozen-string-literal: true
+# Copyright: 2016 - 2018 - MIT License
+# Author: Jordon Bedwell
+# Encoding: utf-8
 
 require "jekyll/generator"
 
 module Jekyll
   module Post
     module Tags
-
-      # --
-      # @see https://github.com/jekyll/jekyll
-      # Generates the sites tags, using Jekyll's
-      #   generators this is controlled by them and we don't
-      #   really need to do that much after that.
-      #
-      # @example
-      #   ```yaml
-      #   # _config.yml
-      #   tag_layout: custom_layout
-      #   ```
-      # --
       class Generator < Jekyll::Generator
+
+        # --
+        # Generate the tags.
+        # @param site [Jekyll::Site]
+        # @return [nil]
+        # --
         def generate(site)
-          # @note this belongs in your `_config.yml`
-          key = (site.config["tag_layout"] || "default").chomp(".html")
+          site.config["tags"] ||= {}
+          key = site.config["tags"]["layout"] || "tag"
+          site.layouts.key?(key) || key = "default" # Main?
+          return error(key) unless site.layouts.key?(key)
+          site.config["tags"]["layout"] = key
+          generate_tags_with(site)
+        end
 
-          if site.layouts.has_key?(key)
-            return site.tags.keys.each do |v|
-              tag = Doc.new(v, site: site)
-              tag.render(site.layouts, site.site_payload)
-              tag.write(site.dest)
-              site.pages << tag
-            end
-
-          # This error should be configurable or removed entirely
-          # because at the end of the day if there is no default.html
-          # or a specific tag layout, the user knows this...
-
-          else
-            Jekyll.logger.error "", "Could not find '#{key}.html' " \
-              "Skipping tags."
+        # --
+        # Generate the tags.
+        # @param site [Jekyll::Site] the site
+        # @see #generate
+        # @return [nil]
+        # --
+        def generate_tags_with(site)
+          site.tags.each_key do |v|
+            site.pages << (Page.new(v, site: site).tap do |o|
+              o.render(site.layouts, site.site_payload); o.write(site.dest)
+            end)
           end
+        end
+
+        # --
+        # Throw an error.
+        # @param layout [String]
+        # @see #generate
+        # @return [nil]
+        # --
+        def error(layout)
+          Jekyll.logger.error "", "Could not find '#{layout}.html' " \
+            "Skipping tag generation."
         end
       end
     end

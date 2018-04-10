@@ -1,6 +1,7 @@
-# Frozen-String-Literal: true
-# Copyright 2015 - 2017 Jordon Bedwell - MIT License
-# Encoding: UTF-8
+# Frozen-string-literal: true
+# Copyright: 2016 - 2018 - MIT License
+# Author: Jordon Bedwell
+# Encoding: utf-8
 
 require_relative "helpers"
 
@@ -13,7 +14,7 @@ module Jekyll
       #   this is mostly modeled after Jekyll's own pages, posts
       #   documents and otherwise.
       # --
-      class Doc < Jekyll::Page
+      class Page < Jekyll::Page
         attr_accessor :site, :base, :tag, :dir, :name
         include Helpers
 
@@ -38,8 +39,9 @@ module Jekyll
         # @return [String]
         # --
         def realpath
-          @site.tags[@tag].sort_by { |v| v.data["date"] \
-            }.first.relative_path
+          @site.tags[@tag].sort_by do |v|
+            v.data["date"]
+          end.first.relative_path
         end
 
         # --

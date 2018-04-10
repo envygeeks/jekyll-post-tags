@@ -1,6 +1,7 @@
-# Frozen-String-Literal: true
-# Copyright 2016 - 2017 Jordon Bedwell - MIT License
-# Encoding: UTF-8
+# Frozen-string-literal: true
+# Copyright: 2016 - 2018 - MIT License
+# Author: Jordon Bedwell
+# Encoding: utf-8
 
 module Jekyll
   module Post
@@ -12,10 +13,7 @@ module Jekyll
         # --
         private
         def tag_layout
-          return @tag_layout ||= begin
-            File.join("_layouts", (site.config["tag_layout"] \
-              ||= "default.html").gsub(/^_layouts\//, ""))
-          end
+          @tag_layout ||= File.join("_layouts", site.config["tags"]["layout"])
         end
 
         # --
@@ -24,16 +22,16 @@ module Jekyll
         # --
         private
         def tag_path
-          return @tag_path ||= begin
-            path = @site.config["tag_path"] || "/tag/:tag.html"
+          @tag_path ||= begin
+            path = @site.config["tags"]["path"] || "/tag/:tag.html"
             path = path.sub(":tag", @tag).split("/")
-            unless path.last =~ /\.html$/
+            unless path.last =~ %r!\.html$!
               path << "/index.html"
             end
 
             [
               path[0...-1].join("/"),
-              path.last
+              path.last,
             ]
           end
         end
