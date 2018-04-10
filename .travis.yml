@@ -13,6 +13,19 @@ env:
     - JEKYLL_VERSION=3.5
     - JEKYLL_VERSION=3.6
     - LINTING=true
+  global:
+    secure: "\
+      wKwUeRkjTVd2h8AhGvS1qLu7iK8Mv0XHnNDX+EFeAiaxhAENZ8/MKHe5dEnTCA+p4THXkX4n\
+      H97SdydEyxI5VMNSeGdGfSFAKIrrsF4yF1uiqz987gb1v0/6c5DwkdbOs++4Fcw2MJ3bgFTE\
+      q/nPRx4BfU7PzKmdHh81ZENT/COIGrh0WoY7JH1QOhTTm7uvNt4xBFIq05mQs0MISmjEiN7u\
+      nqCXisKff0mrU5RhKpcOGxWUf+HVaa2G6J4u11r3eklTHVJ+2pUgDNpqYARqyQfKwy6vnvbQ\
+      C5Pkb8XxLPxjTI5yiEK8qbZADm0pD5UAM0Yb4yIrBMB4BdUqfwL0VctcIfXz6sdArB+8ndaV\
+      NALdWLk1GjsNyrsPKkf7/Q1z1+0Kou8CBf96GN7qhyONVAxUwg1h3WJwjQ3S0Evs0EIxoAfN\
+      zHs/NCwcCou3yC+Hp62gh5ZbOOeB/1iBu4does4CqXcaf8NEVu+r8om3lqTGZZj2HQ1xOSr5\
+      RUMzONm8Dg4G0zaLQ2SfKMeXDi19/gt9Mcki2zZ+En8VFkYtSRhrdr5uUj3dQZLfei1P2glh\
+      0dSyKtcS8vxh1XKuH+uCZqwW2B+gT369QnatJE1h73IzOx1CJlL9illJzCrQQ3l0sva/rwc/\
+      eRPzAlH4CuBDzPyJfWJmbMLp/2YC6gSsrRQ=\
+    "
 rvm:
   - 2.5
   - 2.4

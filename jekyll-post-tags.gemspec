@@ -6,24 +6,26 @@
 $:.unshift(File.expand_path("../lib", __FILE__))
 require "jekyll/post/tags/version"
 
-Gem::Specification.new do |spec|
-  spec.authors = ["Jordon Bedwell"]
-  spec.description = "Reusable Post Tags for Jekyll"
-  spec.files = %w(Rakefile Gemfile README.md LICENSE) + Dir["lib/**/*"]
-  spec.homepage = "http://github.com/envygeeks/jekyll-post-tags"
-  spec.version = Jekyll::Post::Tags::VERSION
-  spec.summary = "Post Tags for Jekyll"
-  spec.email = ["jordon@envygeeks.io"]
-  spec.name = "jekyll-post-tags"
-  spec.require_paths = ["lib"]
-  spec.has_rdoc = false
-  spec.license = "MIT"
+Gem::Specification.new do |s|
+  s.authors = ["Jordon Bedwell"]
+  s.description = "Reusable Post Tags for Jekyll"
+  s.files = %w(Rakefile Gemfile README.md LICENSE) + Dir["lib/**/*"]
+  s.homepage = "http://github.com/envygeeks/jekyll-post-tags"
+  s.version = Jekyll::Post::Tags::VERSION
+  s.summary = "Post Tags for Jekyll"
+  s.email = ["jordon@envygeeks.io"]
+  s.name = "jekyll-post-tags"
+  s.require_paths = ["lib"]
+  s.has_rdoc = false
+  s.license = "MIT"
 
-  spec.add_development_dependency("pry", "~> 0")
-  spec.add_development_dependency("rake", "~> 0")
-  spec.add_development_dependency("rspec", "~> 3.3")
-  spec.add_development_dependency("rubocop", "0.52")
-  spec.add_development_dependency("luna-rspec-formatters", "~> 3.3")
-  spec.add_runtime_dependency("liquid-string-drop", "~> 1.0")
-  spec.add_runtime_dependency("jekyll", "~> 3.1")
+  s.required_ruby_version = ">= 2.4.0"
+  s.add_runtime_dependency("jekyll", "~> 3.1")
+  s.add_development_dependency("rake", "~> 0")
+  s.add_development_dependency("simplecov", "~> 0.16")
+  s.add_development_dependency("luna-rspec-formatters", "~> 3.3")
+  s.add_runtime_dependency("liquid-string-drop", "~> 1.0")
+  s.add_development_dependency("rspec", "~> 3.3")
+  s.add_development_dependency("rubocop", "0.52")
+  s.add_development_dependency("pry", "~> 0")
 end
