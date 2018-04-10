@@ -8,6 +8,7 @@
 # 🔖
 # RSpec, MiniTest, Whatever.
 # --
+task default: [:spec]
 task :spec do
   exec "script/test"
 end

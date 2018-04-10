@@ -118,6 +118,13 @@ Layout/MultilineOperationIndentation:
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
 # --
+# Comments hugging the class are ugly.
+#   It's necessary.
+# --
+Layout/EmptyLinesAroundModuleBody: { Enabled: false }
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+# --
 # 🎨
 # It's better to have private above the method def,
 #   this makes it more explicit.
