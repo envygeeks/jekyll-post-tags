@@ -32,6 +32,11 @@ env:
 rvm:
   - 2.5
   - 2.4
+matrix:
+  fast_finish: true
+  exclude:
+    - env: LINTING=true
+      rvm: 2.4
 branches:
   only:
     - master
