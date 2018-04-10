@@ -9,12 +9,8 @@ cache:
     - vendor/bundle
 env:
   matrix:
-    - JEKYLL_VERSION=3.1
-    - JEKYLL_VERSION=3.2
-    - JEKYLL_VERSION=3.3
-    - JEKYLL_VERSION=3.4
-    - JEKYLL_VERSION=3.5
     - JEKYLL_VERSION=3.6
+    - JEKYLL_VERSION=3.7
     - LINTING=true
   global:
     secure: "\
