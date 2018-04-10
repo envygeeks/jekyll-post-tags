@@ -13,7 +13,10 @@ module Jekyll
         # --
         private
         def tag_layout
-          @tag_layout ||= File.join("_layouts", site.config["tags"]["layout"])
+          @tag_layout ||= begin
+            layout = site.config["tags"]["layout"].sub(%r!\.html$!, "")
+            File.join("_layouts", "#{layout}.html")
+          end
         end
 
         # --
